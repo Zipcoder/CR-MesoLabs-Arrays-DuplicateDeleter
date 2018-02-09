@@ -1,6 +1,6 @@
 package com.zipcodewilmington.looplabs;
 
-import com.sun.org.apache.xpath.internal.operations.String;
+//import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
  * Created by leon on 1/29/18.
@@ -13,24 +13,25 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
+
+
     @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
-        //dupeCount increments as for loop crawls array
-        //i starts at = maxNumberOfDuplications
-        //MAXNUMBEROFDUPLICATIONS IS A NON INCLUSIVE CEILING
-        //if dupeCount equals maxNumberOfDuplications, set everything from i to i-maxNumberOfDuplications to null
-        //CHAR AT FIRST AND FINAL INSTANCE, REMOVE RANGE OF THOSE INDICES
-        //if ((charAt(finalInstance) - charAt(firstInstance) >= maxNumberOfDuplications, remove them all
-        //or, use stringbuilder and filter with delimiters, like we did with the pack lab. then do our regex indexOf crawl and subtraction
         StringBuilder packedString = new StringBuilder();
         stringPacker(packedString);
-        if (int j = 0; j < packedString.)
-        if ((packedString.lastIndexOf("0") - packedString.indexOf("0")) >= maxNumberOfDuplications){
-            packedString.delete(packedString.indexOf("0"), packedString.lastIndexOf("0") + 2);
-            System.out.println(packedString);
-        }
-        return new Integer[0];
+        StringBuilder eventualAnswer = new StringBuilder();
+        String[] splitPackedString = packedString.toString().split(" ");
+        //remove elements with a size bigger than maxNumberOfDuplications, then spit that result out into a string of every number individually.
+        eventualAnswerCreator(maxNumberOfDuplications, eventualAnswer, splitPackedString);
+        Integer[] finalArrayAnswer = new Integer[eventualAnswer.length()];
+        //if done right, this SHOULD be an imdepotent solution
+        //Integer[] arrayOfEventualAnswer = eventualAnswer.split;
+        System.out.println("line 36 " + eventualAnswer.toString());
+        if (emptyArrayAnswerChecker(eventualAnswer)) return new Integer[0];
+        finalArrayAnswerMaker(eventualAnswer, finalArrayAnswer);
+        return finalArrayAnswer;
     }
+
     //ayyyy srplmao
     private void stringPacker(StringBuilder packedString) {
         packedString.append(this.array[0]);
@@ -41,7 +42,29 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
                 packedString.append(" " + array[i]);
             }
         }
-        System.out.println(packedString);
+        System.out.println("line ~50 " + packedString);
+    }
+
+    private void eventualAnswerCreator(int maxNumberOfDuplications, StringBuilder eventualAnswer, String[] splitPackedString) {
+        for (String element:splitPackedString) {
+            if (element.length() < maxNumberOfDuplications){
+                eventualAnswer.append(element);
+            }
+        }
+    }
+
+    private boolean emptyArrayAnswerChecker(StringBuilder eventualAnswer) {
+        if (eventualAnswer.length() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    private void finalArrayAnswerMaker(StringBuilder eventualAnswer, Integer[] finalArrayAnswer) {
+        String[] nextToFinalArray = eventualAnswer.toString().split("");
+        for (int g = 0; g < nextToFinalArray.length; g++) {
+            finalArrayAnswer[g] = Integer.parseInt(nextToFinalArray[g]);
+        }
     }
 
     /**     if (this.array[i].equals(this.array[i-maxNumberOfDuplications])){
