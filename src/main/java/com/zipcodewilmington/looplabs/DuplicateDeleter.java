@@ -7,6 +7,7 @@ import java.util.Arrays;
  */
 public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T> {
     protected final T[] array;
+    protected T[] mutArray;
 
     public DuplicateDeleter(T[] intArray) {
         this.array = intArray;
@@ -21,6 +22,10 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return the index of element if present, else -1
      */
     private int getIndexOf(T element) {
+        for (int i = 0;i<array.length;i++) {
+            if (array[i].equals(element))
+                return i;
+        }
         return -1;
     }
 
@@ -30,7 +35,12 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return number of times value at 'index' occurs in the array
      */
     private int getTimesOccurred(int index) {
-        return -1;
+        int c = 0;
+        for (int i=0;i<array.length;i++) {
+            if (array[i].equals(array[index]))
+                c++;
+        }
+        return c;
     }
 
     /**
@@ -39,7 +49,7 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return true if items were removed else false
      */
     private boolean removeDupesByIndex(int index) {
-        return false;
+        return false; //TODO remove all by index
     }
 
     /**
@@ -47,8 +57,8 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @param thing the thing of which to remove dupes
      * @return true if things were removed else false
      */
-    private boolean removeAllOccurrencesOf(T thing) {
-        return false;
+    private boolean removeDupesByValue(T thing) {
+        return false; //TODO remove all by value
     }
 
     /**
@@ -57,7 +67,15 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return the item removed or null if not found
      */
     private T removeElementAtIndex(int index) {
-        return null;
+        T[] result = new T[array.length - 1];
+        System.arraycopy(array, 0, result, 0, index); // copy the objects before the removed item
+
+        if (index < array.length - 1) // if last/only item, don't need a second copy
+            System.arraycopy(array, index + 1, result, index, array.length - index - 1); // copy the objects after the removed index
+
+        mutArray = result; // mutArray now references the data at 'result'
+
+        return array[index]; // just in case
     }
 
     @Override
