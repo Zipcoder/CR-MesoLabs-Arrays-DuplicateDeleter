@@ -6,6 +6,10 @@ package com.zipcodewilmington.looplabs;
  */
 public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
+    public IntegerDuplicateDeleter(Integer[] array) {
+        super(array);
+    }
+
     @Override
     public Integer[] removeDuplicates(int minimumOccurrences) {
         return new Integer[0];
