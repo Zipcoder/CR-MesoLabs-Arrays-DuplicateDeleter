@@ -11,6 +11,7 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
 
     public DuplicateDeleter(T[] intArray) {
         this.array = intArray;
+        this.mutArray = array; // if no changes occur, all is well;
     }
 
     abstract public T[] removeDuplicates(int minimumOccurrences);
@@ -22,7 +23,7 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return the index of element if present, else -1
      */
     private int getIndexOf(T element) {
-        for (int i = 0;i<array.length;i++) {
+        for (int i = 0;i<mutArray.length;i++) {
             if (array[i].equals(element))
                 return i;
         }
@@ -34,22 +35,13 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @param index the index of the desired value
      * @return number of times value at 'index' occurs in the array
      */
-    private int getTimesOccurred(int index) {
+     protected int getTimesOccurred(int index) {
         int c = 0;
-        for (int i=0;i<array.length;i++) {
-            if (array[i].equals(array[index]))
+        for (int i=0;i<mutArray.length;i++) {
+            if (mutArray[i].equals(mutArray[index]))
                 c++;
         }
         return c;
-    }
-
-    /**
-     * remove all occurrences of the value at given index
-     * @param index the index of the target value
-     * @return true if items were removed else false
-     */
-    private boolean removeDupesByIndex(int index) {
-        return false; //TODO remove all by index
     }
 
     /**
@@ -57,9 +49,13 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @param thing the thing of which to remove dupes
      * @return true if things were removed else false
      */
-    private boolean removeDupesByValue(T thing) {
-        return false; //TODO remove all by value
-    }
+     protected boolean removeDupesByValue(T thing) {
+         for (int i=0;i<mutArray.length;i++) {
+            if (mutArray[i] == thing)
+                removeElementAtIndex(i);
+         }
+         return true;
+     }
 
     /**
      * remove and return an item from the array at the given index
@@ -67,19 +63,19 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @return the item removed or null if not found
      */
     private T removeElementAtIndex(int index) {
-        T[] result = new T[array.length - 1];
-        System.arraycopy(array, 0, result, 0, index); // copy the objects before the removed item
+        Object[] result = new Object[mutArray.length - 1];
+        System.arraycopy(mutArray, 0, result, 0, index); // copy the objects before the removed item
 
-        if (index < array.length - 1) // if last/only item, don't need a second copy
-            System.arraycopy(array, index + 1, result, index, array.length - index - 1); // copy the objects after the removed index
+        if (index < mutArray.length - 1) // if last/only item, don't need a second copy
+            System.arraycopy(mutArray, index + 1, result, index, mutArray.length - index - 1); // copy the objects after the removed index
 
-        mutArray = result; // mutArray now references the data at 'result'
+        mutArray = (T[])result; // mutArray now references the data at 'result'
 
         return array[index]; // just in case
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(array);
+        return Arrays.toString(mutArray);
     }
 }

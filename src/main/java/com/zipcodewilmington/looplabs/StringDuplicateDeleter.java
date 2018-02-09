@@ -1,6 +1,7 @@
 package com.zipcodewilmington.looplabs;
 
-import java.util.Arrays;
+
+import java.util.ArrayList;
 
 /**
  * Created by leon on 1/28/18.
@@ -13,7 +14,6 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
     @Override
     public String[] removeDuplicates(int minimumOccurrences) {
-        //
         return new String[0];
     }
 
