@@ -20,7 +20,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         StringBuilder eventualAnswer = new StringBuilder();
         String[] splitPackedString = packedString.toString().split(" ");
         //remove elements with a size bigger than maxNumberOfDuplications, then spit that result out into a string of every number individually.
-        eventualAnswerCreator(exactNumberOfDuplications, eventualAnswer, splitPackedString);
+        eventualExactAnswerCreator(exactNumberOfDuplications, eventualAnswer, splitPackedString);
         Integer[] finalArrayAnswer = new Integer[eventualAnswer.length()];
         //if done right, this SHOULD be an imdepotent solution
         //Integer[] arrayOfEventualAnswer = eventualAnswer.split;
@@ -39,7 +39,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         //remove elements with a size bigger than maxNumberOfDuplications, then spit that result out into a string of every number individually.
         eventualAnswerCreator(maxNumberOfDuplications, eventualAnswer, splitPackedString);
         Integer[] finalArrayAnswer = new Integer[eventualAnswer.length()];
-        
+
         //if done right, this SHOULD be an imdepotent solution
         //Integer[] arrayOfEventualAnswer = eventualAnswer.split;
         System.out.println("line 36 " + eventualAnswer.toString());
@@ -71,7 +71,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     private void eventualExactAnswerCreator(int exactNumberOfDuplications, StringBuilder eventualAnswer, String[] splitPackedString) {
         for (String element:splitPackedString) {
-            if (element.length() < exactNumberOfDuplications){
+            if (!(element.length() == exactNumberOfDuplications)){
                 eventualAnswer.append(element);
             }
         }
@@ -97,6 +97,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
      }
      this will not actually work, it'll remove it if you give an exact number of instances it can't be, and want to delete more of those instances. but it won't delete more than that.
      */
+
 
 
 
