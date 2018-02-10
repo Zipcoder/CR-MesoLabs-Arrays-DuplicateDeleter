@@ -75,14 +75,14 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         }
     }
 
-    private boolean emptyArrayAnswerChecker(StringBuilder eventualAnswer) {
+    public boolean emptyArrayAnswerChecker(StringBuilder eventualAnswer) {
         if (eventualAnswer.length() == 0){
             return true;
         }
         return false;
     }
 
-    private void finalArrayAnswerMaker(StringBuilder eventualAnswer, Integer[] finalArrayAnswer) {
+    public void finalArrayAnswerMaker(StringBuilder eventualAnswer, Integer[] finalArrayAnswer) {
         String[] nextToFinalArray = eventualAnswer.toString().split("");
         for (int g = 0; g < nextToFinalArray.length; g++) {
             finalArrayAnswer[g] = Integer.parseInt(nextToFinalArray[g]);

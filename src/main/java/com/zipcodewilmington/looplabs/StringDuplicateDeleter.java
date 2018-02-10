@@ -13,9 +13,8 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         super(intArray);
     }
 
-    int dupeCounter = 0;
-
     public String[] removeDuplicates(int maxNumberOfDuplications) {
+        int dupeCounter = 0;
         StringBuilder duplicates = new StringBuilder();
         if (removeAllZeroOneChecker(maxNumberOfDuplications)) return new String[0];
         removeStringBuilderBuilder(maxNumberOfDuplications, duplicates, dupeCounter);
@@ -24,13 +23,14 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     }
 
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
+        int dupeCounter = 0;
         StringBuilder duplicates = new StringBuilder();
         exactStringBuilderBuilder(exactNumberOfDuplications, duplicates, dupeCounter);
         System.out.println(duplicates);
         return duplicates.toString().split(",");
     }
 
-    private void removeStringBuilderBuilder(int maxNumberOfDuplications, StringBuilder duplicates, int dupeCounter) {
+    public void removeStringBuilderBuilder(int maxNumberOfDuplications, StringBuilder duplicates, int dupeCounter) {
         for (int i = 0; i < this.array.length; i++){
             dupeCounter = getDupeCounterOuter(dupeCounter, this.array[i]);
             System.out.println(dupeCounter);
@@ -38,7 +38,7 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         }
     }
 
-    private int getDupeCounterOuter(int dupeCounter, String s) {
+    public int getDupeCounterOuter(int dupeCounter, String s) {
         for (int j = 0; j < this.array.length; j++){
             dupeCounter = getDupeCounter(dupeCounter, s, this.array[j]);
         }
@@ -53,14 +53,14 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         return dupeCounter;
     }
 
-    private int getDupeCounter(int dupeCounter, String s, String anObject) {
+    public int getDupeCounter(int dupeCounter, String s, String anObject) {
         if (s.equals(anObject)){
             dupeCounter++;
         }
         return dupeCounter;
     }
 
-    private boolean removeAllZeroOneChecker(int maxNumberOfDuplications) {
+    public boolean removeAllZeroOneChecker(int maxNumberOfDuplications) {
         if (maxNumberOfDuplications == 0 || maxNumberOfDuplications == 1){
             return true;
         }
