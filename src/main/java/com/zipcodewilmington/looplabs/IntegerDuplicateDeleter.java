@@ -11,12 +11,12 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     public IntegerDuplicateDeleter(Integer[] array) {
         super(array);
+        /* TODO: hash of value -> timesOccurred for quicker lookup and to pull out some redundant logic */
     }
-
-    //TODO: this can be better. make it work first.
 
     @Override
     public Integer[] removeDuplicates(int minimumOccurrences) {
+        this.mutArray = array;
         for(int i=0;i<array.length;i++) {
             int c = getTimesOccurred(i);
             if (c >= minimumOccurrences)
@@ -27,6 +27,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfOccurrences) {
+        this.mutArray = array;
         for(int i=0;i<array.length;i++) {
             int c = getTimesOccurred(i);
             if (c == exactNumberOfOccurrences)

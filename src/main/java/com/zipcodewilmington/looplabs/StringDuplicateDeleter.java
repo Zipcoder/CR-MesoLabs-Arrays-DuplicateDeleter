@@ -11,11 +11,23 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
     @Override
     public String[] removeDuplicates(int minimumOccurrences) {
-        return new String[0];
+        this.mutArray = array;
+        for(int i=0;i<array.length;i++) {
+            int c = getTimesOccurred(i);
+            if (c >= minimumOccurrences)
+                removeDupesByValue(array[i], c);
+        }
+        return this.mutArray;
     }
 
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfOccurrences) {
-        return new String[0];
+        this.mutArray = array;
+        for(int i=0;i<array.length;i++) {
+            int c = getTimesOccurred(i);
+            if (c == exactNumberOfOccurrences)
+                removeDupesByValue(array[i], c);
+        }
+        return mutArray;
     }
 }

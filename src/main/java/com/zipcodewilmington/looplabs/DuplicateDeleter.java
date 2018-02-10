@@ -1,6 +1,5 @@
 package com.zipcodewilmington.looplabs;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -48,17 +47,19 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      }
 
     /**
-     *
-     * @param startIndex
-     * @param timesOccurred
-     * @return
+     * removes a batch of dupes using the first dupe's index and the timesOccurred as an offset.
+     *      (sorted at construction)
+     * @param startIndex first index of the trash
+     * @param timesOccurred times the trash occurs used as an offset
+     * @return true, save err handling for later
      */
      private boolean removeDupesBatch(int startIndex, int timesOccurred) {
+
+         // this gets around the Object[] -> Integer[]/String[] problem. Arrays.copyOf forces type of the src onto the copy
          T[] result = Arrays.copyOf(Arrays.copyOfRange(mutArray, 0, startIndex), mutArray.length-timesOccurred);
 
          System.arraycopy(mutArray, startIndex + timesOccurred, result, startIndex, mutArray.length - startIndex - timesOccurred); // copy the objects after the removed index
 
-         // mutArray now references the data at 'result'
          mutArray = result;
          return true;
      }
