@@ -11,18 +11,65 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     }
 
     public Integer[] removeDuplicates  (int maxNumberOfDuplications){
-       // System.out.println(Arrays.toString(intArray));
-        System.out.println(Arrays.toString(this.array));
-        Integer[] test = new Integer[1];
-        return test;
+        Integer[] outputArray = new Integer[0];
+        Integer [] toDelete = new Integer[0];
+        for(Integer i  : this.array){
+            if (containsTimes(this.array, i) >= maxNumberOfDuplications){
+
+            }
+        }
+
+        return outputArray;
 
     }
 
     //@Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications){
-        System.out.println(Arrays.toString(this.array));
+        //System.out.println(Arrays.toString(this.array));
         Integer[] test = new Integer[1];
         return test;
     }
 
+     //test main
+    public static void main(String[] args) {
+        Integer [] tester = {0,1,2,3,4,5,1};
+        System.out.println(containsTimes(tester, 1));
+        tester = delete(tester, 1);
+        System.out.println(Arrays.toString(tester));
+    }
+
+    public static Integer[] delete(Integer[] inputArray, int value) {
+        Integer[] workingArray = inputArray;
+        Integer[] outputArray = new Integer[0];
+        int counter = 0;
+        for (int i = 0; i < workingArray.length; i++) {
+            if (!workingArray[i].equals(value)) {
+                outputArray = Arrays.copyOf(outputArray, outputArray.length + 1);
+                outputArray[counter] = workingArray[i];
+                counter++;
+            }
+        }
+        return outputArray;
+    }
+
+    public static int containsTimes(Integer[] inputArray, int value) {
+        int counter = 0;
+        for (Integer i : inputArray) {
+            if (i == value) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public static boolean contains(Integer[] inputArray, int value) {
+        for (Integer i : inputArray) {
+            if (i == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
+
