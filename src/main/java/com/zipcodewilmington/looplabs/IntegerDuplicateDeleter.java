@@ -55,7 +55,6 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
                     freqOfNumObserved++;
                 }
                 else if (!(array[i].equals(array[j]))){
-                    freqOfNumObserved++;
                     if (freqOfNumObserved == exactNumberOfDuplications){
                         freqOfNumObserved = 0;
                         numberBeingObserved = 0;
