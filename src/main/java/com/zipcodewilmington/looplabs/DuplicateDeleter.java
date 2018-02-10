@@ -1,5 +1,6 @@
 package com.zipcodewilmington.looplabs;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -10,25 +11,14 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
     protected T[] mutArray;
 
     public DuplicateDeleter(T[] intArray) {
+        Arrays.sort(intArray);
         this.array = intArray;
         this.mutArray = array; // if no changes occur, all is well;
+
     }
 
     abstract public T[] removeDuplicates(int minimumOccurrences);
     abstract public T[] removeDuplicatesExactly(int exactNumberOfOccurrences);
-
-    /**
-     * get the first index of element if it exists otherwise return -1
-     * @param element the element for which to search
-     * @return the index of element if present, else -1
-     */
-    private int getIndexOf(T element) {
-        for (int i = 0;i<mutArray.length;i++) {
-            if (array[i].equals(element))
-                return i;
-        }
-        return -1;
-    }
 
     /**
      * calculate the number of times the value at [index] occurs in the array
@@ -37,8 +27,8 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      */
      protected int getTimesOccurred(int index) {
         int c = 0;
-        for (int i=0;i<mutArray.length;i++) {
-            if (mutArray[i].equals(mutArray[index]))
+        for (int i=0;i<array.length;i++) {
+            if (array[i].equals(array[index]))
                 c++;
         }
         return c;
@@ -49,30 +39,29 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
      * @param thing the thing of which to remove dupes
      * @return true if things were removed else false
      */
-     protected boolean removeDupesByValue(T thing) {
+     protected boolean removeDupesByValue(T thing, int timesOccurred) {
          for (int i=0;i<mutArray.length;i++) {
-            if (mutArray[i] == thing)
-                removeElementAtIndex(i);
+            if (mutArray[i].equals(thing))
+                removeDupesBatch(i, timesOccurred);
          }
          return true;
      }
 
     /**
-     * remove and return an item from the array at the given index
-     * @param index the index of the item to be removed
-     * @return the item removed or null if not found
+     *
+     * @param startIndex
+     * @param timesOccurred
+     * @return
      */
-    private T removeElementAtIndex(int index) {
-        Object[] result = new Object[mutArray.length - 1];
-        System.arraycopy(mutArray, 0, result, 0, index); // copy the objects before the removed item
+     private boolean removeDupesBatch(int startIndex, int timesOccurred) {
+         T[] result = Arrays.copyOf(Arrays.copyOfRange(mutArray, 0, startIndex), mutArray.length-timesOccurred);
 
-        if (index < mutArray.length - 1) // if last/only item, don't need a second copy
-            System.arraycopy(mutArray, index + 1, result, index, mutArray.length - index - 1); // copy the objects after the removed index
+         System.arraycopy(mutArray, startIndex + timesOccurred, result, startIndex, mutArray.length - startIndex - timesOccurred); // copy the objects after the removed index
 
-        mutArray = (T[])result; // mutArray now references the data at 'result'
-
-        return array[index]; // just in case
-    }
+         // mutArray now references the data at 'result'
+         mutArray = result;
+         return true;
+     }
 
     @Override
     public String toString() {

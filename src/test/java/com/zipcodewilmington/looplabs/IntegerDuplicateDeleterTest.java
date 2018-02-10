@@ -53,6 +53,8 @@ public class IntegerDuplicateDeleterTest {
         deleter.removeDuplicatesExactly(2);
         deleter.removeDuplicatesExactly(1);
 
+        System.out.println(Arrays.toString(deleter.array));
+
         Integer[] actual = deleter.removeDuplicatesExactly(3);
         TestUtils.assertArrayEquality(expected, actual);
     }

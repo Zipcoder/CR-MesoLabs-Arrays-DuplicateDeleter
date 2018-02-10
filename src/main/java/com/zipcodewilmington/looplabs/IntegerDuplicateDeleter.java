@@ -1,6 +1,7 @@
 package com.zipcodewilmington.looplabs;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Created by leon on 1/29/18.
@@ -16,20 +17,20 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     @Override
     public Integer[] removeDuplicates(int minimumOccurrences) {
-        for(int i=0;i<mutArray.length;i++) {
+        for(int i=0;i<array.length;i++) {
             int c = getTimesOccurred(i);
             if (c >= minimumOccurrences)
-                removeDupesByValue(mutArray[i]);
+                removeDupesByValue(array[i], c);
         }
-        return mutArray;
+        return this.mutArray;
     }
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfOccurrences) {
-        for(int i=0;i<mutArray.length;i++) {
+        for(int i=0;i<array.length;i++) {
             int c = getTimesOccurred(i);
             if (c == exactNumberOfOccurrences)
-                removeDupesByValue(mutArray[i]);
+                removeDupesByValue(array[i], c);
         }
         return mutArray;
     }
