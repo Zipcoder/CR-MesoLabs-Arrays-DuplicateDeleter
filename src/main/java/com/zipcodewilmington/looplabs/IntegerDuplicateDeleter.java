@@ -13,7 +13,6 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
-    @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications){
         StringBuilder packedString = new StringBuilder();
         stringPacker(packedString);
@@ -30,7 +29,6 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         return finalArrayAnswer;
     }
 
-    @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
         StringBuilder packedString = new StringBuilder();
         stringPacker(packedString);

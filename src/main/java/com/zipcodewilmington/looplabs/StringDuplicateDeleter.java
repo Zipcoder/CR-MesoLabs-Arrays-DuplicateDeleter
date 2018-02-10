@@ -13,20 +13,18 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         super(intArray);
     }
 
-    @Override
+    int dupeCounter = 0;
+
     public String[] removeDuplicates(int maxNumberOfDuplications) {
         StringBuilder duplicates = new StringBuilder();
-        int dupeCounter = 0;
         if (removeAllZeroOneChecker(maxNumberOfDuplications)) return new String[0];
         removeStringBuilderBuilder(maxNumberOfDuplications, duplicates, dupeCounter);
         System.out.println(duplicates);
         return duplicates.toString().split(",");
     }
 
-    @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
         StringBuilder duplicates = new StringBuilder();
-        int dupeCounter = 0;
         exactStringBuilderBuilder(exactNumberOfDuplications, duplicates, dupeCounter);
         System.out.println(duplicates);
         return duplicates.toString().split(",");
