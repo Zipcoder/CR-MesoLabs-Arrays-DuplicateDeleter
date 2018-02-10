@@ -43,35 +43,49 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     }
 
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        String counter = "";
-        String buffArray = "";
+        //counters
+        int numberBeingObserved;
+        int freqOfNumObserved = 0;
+        int counterForBuffArr = 0;
+        Integer[] bufferArray = new Integer[array.length*2];
         for (int i = 0; i < array.length - 1; i++) {
+            numberBeingObserved = array[i];
             for(int j = i+1; j < array.length-1; j++){
                 if (array[i].equals(array[j])) {
-                    counter += (array[j] + " ");
+                    freqOfNumObserved++;
                 }
                 else if (!(array[i].equals(array[j]))){
-                    counter += (array[i] + " ");
-                    buffArray += counter;
-                    counter = "";
+                    freqOfNumObserved++;
+                    if (freqOfNumObserved == exactNumberOfDuplications){
+                        freqOfNumObserved = 0;
+                        numberBeingObserved = 0;
+                        i = j;
+                        j = (i+1);
+                        continue;
+                    }
+                    //fill the buffer array with info
+                    for(int k = freqOfNumObserved; k > 0; k--){
+                        bufferArray[counterForBuffArr] = numberBeingObserved;
+                        System.out.println(bufferArray[i]+ "\n");
+                        counterForBuffArr++;
+                    }
                     i = j;
                     j = (i+1);
                     break;
                 }
             }
         }
-        String[] beforeConv = buffArray.split(" ");
         int nullCount = 0;
-        for(String num: beforeConv){
+        for(Integer num: bufferArray){
             if (num == null){
                 nullCount++;
             }
         }
-        Integer[] revArray = new Integer[beforeConv.length - nullCount];
-        for (int i = 0; i < beforeConv.length; i++) {
-            revArray[i] = Integer.getInteger(beforeConv[i]);
+        Integer[] revArray = new Integer[bufferArray.length - nullCount];
+        for (int i = 0; i < bufferArray.length; i++) {
+            revArray[i] = bufferArray[i];
             System.out.println(revArray[i]);
-            System.out.println(beforeConv[i]);
+            System.out.println(bufferArray[i]);
         }
 
 
