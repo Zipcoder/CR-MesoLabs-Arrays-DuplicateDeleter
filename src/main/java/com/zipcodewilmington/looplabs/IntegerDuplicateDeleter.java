@@ -77,28 +77,23 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
  }
 
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
+        Integer[] result = new Integer[0];
+        int sum = 0;
+        int temp = 0;
 
-        // for each interger in the array remove max number of the duplications;
-        Integer[] someNumers = this.array;
-        Integer[] exactRemoved = new Integer[0];
-        int count = 0;
-        int max = 0;
-        /*sorts the array of Intergers numbers*/
-        Arrays.sort(someNumers);
-        for (Integer n : someNumers) {
-            System.out.println(n.toString());
-        }
+        for (int i = 0; i < this.array.length; i++) {
 
-        for (int i = 1; i < someNumers.length - 1; i++) {
-            exactRemoved = Arrays.copyOf(exactRemoved, count + 1);
-            if (exactRemoved[i] == someNumers[i + 1] && max != exactNumberOfDuplications) {
-                exactRemoved[count] = someNumers[i];
+            temp = this.array[i];
 
-                count++;
-                max++;
+            if (countNumbers(temp) != exactNumberOfDuplications) {
+
+                result = Arrays.copyOf( result, sum +1);
+                result[sum] = temp;
+                sum++;
             }
-            exactRemoved[count] = someNumers[i];
         }
-        return exactRemoved;
+
+   return result;
+
     }
 }
