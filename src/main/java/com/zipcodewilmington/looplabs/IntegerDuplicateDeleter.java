@@ -34,14 +34,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
                 counter = 0;
             }
             String[] stringArray = removeDuplicates.split(" ");
-            Integer[] integerArray = new Integer[stringArray.length];
-
-            for (int k = 0; k < integerArray.length; k++){
-                integerArray[k] = Integer.parseInt(stringArray[k]);
-
-            }
-
-
+            Integer[] integerArray = stringToIntArray(stringArray);
             return integerArray;
         }
     }
@@ -70,17 +63,23 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
                 counter = 0;
             }
             String [] stringArray = removeDuplicates.split(" ");
-            Integer[] integerArray = new Integer[stringArray.length];
-
-            for (int k = 0; k < integerArray.length; k++){
-                integerArray[k] = Integer.parseInt(stringArray[k]);
-
-            }
+            Integer[] integerArray =stringToIntArray(stringArray);
 
 
             return integerArray;
 
 
+
+    }
+
+    private Integer[] stringToIntArray(String[] stringArray){
+        Integer[] finalArray = new Integer[stringArray.length];
+
+        for (int k = 0; k < finalArray.length; k++){
+            finalArray[k] = Integer.parseInt(stringArray[k]);
+
+        }
+        return finalArray;
 
     }
 }

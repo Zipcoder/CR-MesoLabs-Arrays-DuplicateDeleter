@@ -12,7 +12,6 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
 
-
         String removeDuplicates = "";
         int counter = 0;
         String[] emptyArray = {};
