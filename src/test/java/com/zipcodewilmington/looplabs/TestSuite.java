@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
         IntegerDuplicateDeleterTest.class,
-        StringDuplicateDeleterTest.class
+        StringDuplicateDeleterTest.class,
+        patricksSuperGoodNewCustomTest.class
 })
 public class TestSuite {
 }
