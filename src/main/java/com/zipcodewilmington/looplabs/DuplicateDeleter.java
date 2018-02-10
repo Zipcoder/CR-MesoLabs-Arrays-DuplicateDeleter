@@ -7,6 +7,7 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
     protected final T[] array;
 
     public DuplicateDeleter(T[] intArray) {
+
         this.array = intArray;
     }
 
