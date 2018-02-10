@@ -13,7 +13,22 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
-
+    @Override
+    public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications){
+        StringBuilder packedString = new StringBuilder();
+        stringPacker(packedString);
+        StringBuilder eventualAnswer = new StringBuilder();
+        String[] splitPackedString = packedString.toString().split(" ");
+        //remove elements with a size bigger than maxNumberOfDuplications, then spit that result out into a string of every number individually.
+        eventualAnswerCreator(exactNumberOfDuplications, eventualAnswer, splitPackedString);
+        Integer[] finalArrayAnswer = new Integer[eventualAnswer.length()];
+        //if done right, this SHOULD be an imdepotent solution
+        //Integer[] arrayOfEventualAnswer = eventualAnswer.split;
+        System.out.println("line 36 " + eventualAnswer.toString());
+        if (emptyArrayAnswerChecker(eventualAnswer)) return new Integer[0];
+        finalArrayAnswerMaker(eventualAnswer, finalArrayAnswer);
+        return finalArrayAnswer;
+    }
 
     @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
@@ -24,6 +39,7 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         //remove elements with a size bigger than maxNumberOfDuplications, then spit that result out into a string of every number individually.
         eventualAnswerCreator(maxNumberOfDuplications, eventualAnswer, splitPackedString);
         Integer[] finalArrayAnswer = new Integer[eventualAnswer.length()];
+        
         //if done right, this SHOULD be an imdepotent solution
         //Integer[] arrayOfEventualAnswer = eventualAnswer.split;
         System.out.println("line 36 " + eventualAnswer.toString());
@@ -53,6 +69,14 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         }
     }
 
+    private void eventualExactAnswerCreator(int exactNumberOfDuplications, StringBuilder eventualAnswer, String[] splitPackedString) {
+        for (String element:splitPackedString) {
+            if (element.length() < exactNumberOfDuplications){
+                eventualAnswer.append(element);
+            }
+        }
+    }
+
     private boolean emptyArrayAnswerChecker(StringBuilder eventualAnswer) {
         if (eventualAnswer.length() == 0){
             return true;
@@ -69,14 +93,11 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     /**     if (this.array[i].equals(this.array[i-maxNumberOfDuplications])){
      *          range of this.array[i] to this.array[i-maxNumberOfDuplications] are set to null
-                System.out.println("IM DOING A NULL");
-            }
-            this will not actually work, it'll remove it if you give an exact number of instances it can't be, and want to delete more of those instances. but it won't delete more than that.
+     System.out.println("IM DOING A NULL");
+     }
+     this will not actually work, it'll remove it if you give an exact number of instances it can't be, and want to delete more of those instances. but it won't delete more than that.
      */
 
-    @Override
-    public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications){
-        return new Integer[0];
-    }
+
 
 }
