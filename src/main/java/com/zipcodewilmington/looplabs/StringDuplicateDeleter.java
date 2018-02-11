@@ -13,10 +13,13 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
 
-        String [] resultArray = new String[0];
+        String[] resultArray = new String[0];
         for(int i = 0; i < this.array.length; i++){
-            if(getNumberOfOccurrences(this.array, this.array[i]) >= maxNumberOfDuplications){
-                resultArray = Arrays.copyOf(resultArray, resultArray.length+1);
+            if(getNumberOfOccurrences(this.array, this.array[i]) < maxNumberOfDuplications){
+                int currentIndex = resultArray.length;
+                resultArray = Arrays.copyOf(resultArray, currentIndex + 1);
+                resultArray[currentIndex] = this.array[i];
+
             }
         }
 
@@ -26,15 +29,32 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
 
-        String [] resultArray = new String[0];
+        String[] resultArray = new String[0];
         for(int i = 0; i < this.array.length; i++){
-            if(getNumberOfOccurrences(this.array, this.array[i]) == exactNumberOfDuplications){
-                resultArray = Arrays.copyOf(resultArray, resultArray.length+1);
+            if(getNumberOfOccurrences(this.array, this.array[i]) != exactNumberOfDuplications){
+                int currentIndex = resultArray.length;
+                resultArray = Arrays.copyOf(resultArray, currentIndex + 1);
+                resultArray[currentIndex] = this.array[i];
             }
         }
 
         return resultArray;
     }
+    /**
+     * @param inputArray array of String objects
+     * @param value value to check array for
+     * @return number of occurrences the specified `value` has occurred
+     */ // TODO
+    private int getNumberOfOccurrences(String[] inputArray, String value) {
 
+        int valOccurs = 0;
+        for (int i = 0; i < inputArray.length; i++) {
+            if (inputArray[i].equals(value)) {
+                valOccurs++;
+            }
+        }
+        return valOccurs;
+    }
 
 }
+
