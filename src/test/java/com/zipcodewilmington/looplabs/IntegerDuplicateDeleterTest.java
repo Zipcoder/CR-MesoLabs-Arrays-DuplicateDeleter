@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Created by leon on 1/25/18.
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying this class.
- */
+  */
 public class IntegerDuplicateDeleterTest {
 
     private static Integer[] intArray;
