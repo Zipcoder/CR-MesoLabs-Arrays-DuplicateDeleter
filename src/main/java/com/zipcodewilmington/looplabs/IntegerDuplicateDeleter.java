@@ -8,3 +8,4 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 }
 
 // save1
+// save2
