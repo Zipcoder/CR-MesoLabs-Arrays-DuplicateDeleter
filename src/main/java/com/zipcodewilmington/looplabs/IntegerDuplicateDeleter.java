@@ -1,9 +1,9 @@
 package com.zipcodewilmington.looplabs;
 
 
-
 /**
  * Created by leon on 1/29/18.
+ *
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying the signature of this class.
  */
 public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
@@ -34,60 +34,91 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
             }
         }
         String[] newArray = buffArray.split("");
-        for(String i : newArray) System.out.println(i);
+        for (String i : newArray) System.out.println(i);
         Integer[] revArray = new Integer[newArray.length];
-        for (int i = 0; i < buffArray.length(); i++){
+        for (int i = 0; i < buffArray.length(); i++) {
             revArray[i] = Integer.valueOf(newArray[i]);
         }
         return revArray;
     }
 
+
+
+
+
+
+
+
+
+
+
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
         //counters
-        int numberBeingObserved;
-        int freqOfNumObserved = 0;
-        int counterForBuffArr = 0;
-        Integer[] bufferArray = new Integer[array.length*2];
-        for (int i = 0; i < array.length - 1; i++) {
-            numberBeingObserved = array[i];
-            for(int j = i+1; j < array.length-1; j++){
-                if (array[i].equals(array[j])) {
-                    freqOfNumObserved++;
-                }
-                else if (!(array[i].equals(array[j]))){
-                    if (freqOfNumObserved == exactNumberOfDuplications){
-                        freqOfNumObserved = 0;
-                        numberBeingObserved = 0;
-                        i = j;
-                        j = (i+1);
-                        continue;
-                    }
-                    //fill the buffer array with info
-                    for(int k = freqOfNumObserved; k > 0; k--){
-                        bufferArray[counterForBuffArr] = numberBeingObserved;
-                        System.out.println(bufferArray[i]+ "\n");
-                        counterForBuffArr++;
-                    }
-                    i = j;
-                    j = (i+1);
-                    break;
-                }
+        int counterForOcc = 0;
+        int countForHowManyInts = 1;
+
+        //counting how many different ints there are
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != array[i - 1]) {
+                countForHowManyInts++;
             }
         }
-        int nullCount = 0;
-        for(Integer num: bufferArray){
-            if (num == null){
-                nullCount++;
+
+        //array to hold int and instances
+        Integer[][] numsAndOcc = new Integer[countForHowManyInts][2];
+
+        int counterForNumsInstances = 0;
+        //filling int into first column
+        numsAndOcc[0][0] = array[0];
+        counterForOcc = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (!(array[i].equals(array[i - 1]))) {
+                numsAndOcc[counterForOcc][0] = array[i];
+                counterForOcc++;
+                System.out.println(numsAndOcc[counterForOcc][0]);
             }
         }
-        Integer[] revArray = new Integer[bufferArray.length - nullCount];
-        for (int i = 0; i < bufferArray.length; i++) {
-            revArray[i] = bufferArray[i];
-            System.out.println(revArray[i]);
-            System.out.println(bufferArray[i]);
+
+        //filling intsances
+        numsAndOcc[0][1] = 1;
+        for (int i = 1; i < array.length; i++) {
+            counterForOcc = 0;
+                if (array[i].equals(array[i-1])) {
+                    counterForOcc++;
+                }
+                if (!array[i].equals(array[i-1])) {
+                    numsAndOcc[counterForNumsInstances][1] += counterForOcc;
+                    counterForNumsInstances++;
+                    //System.out.println(numsAndOcc[counterForNumsFirstIndex][1]);
+                }
         }
 
 
+        //counting bad numbers
+        int countForBadNums = 0;
+        counterForOcc = 0;
+        for (int i = 0; i < numsAndOcc.length; i++) {
+            if (numsAndOcc[i][1] == exactNumberOfDuplications) {
+                countForBadNums += numsAndOcc[i][1];
+                numsAndOcc[i][1] = 0;
+
+            }
+            counterForOcc += numsAndOcc[i][1];
+        }
+
+
+
+        //filling output array
+        Integer[] revArray = new Integer[counterForOcc - countForBadNums];
+        int counterForRevArray = 0;
+        for (int i = 0; i < revArray.length; i++) {
+            for (int j = numsAndOcc[i].length; j > 0; j--) {
+                revArray[counterForRevArray] = numsAndOcc[i][0];
+                counterForRevArray++;
+                for (Integer num : revArray) System.out.println(num);
+
+            }
+        }
         return revArray;
     }
 }
