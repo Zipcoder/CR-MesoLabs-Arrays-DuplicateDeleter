@@ -15,7 +15,7 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     public String[] removeDuplicates(int maxNumberOfDuplications) {
 
 
-        return new String[0];
+        return removeString(maxNumberOfDuplications);
     }
 
 
@@ -36,7 +36,7 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         for (int i = 0; i < this.array.length; i++) {
              temp[0] = this.array[i];
 
-            if (countStrings(temp) == max) {
+            if (countStrings(temp[0]) != max) {
 
                 result = Arrays.copyOf(result, sum + 1);
                 result[sum] = temp[0];
@@ -46,17 +46,37 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         return result;
     }
 
-    public int countStrings(String[] s) {
+    public int countStrings(String s) {
         int count = 0;
 
         for (int i = 0; i < this.array.length; i++) {
-            if (this.array[i].equals(s[0])) {
+            if (this.array[i].equals(s)) {
                 count++;
 
             }
         }
         printInt(count);
         return count;
+    }
+    public String[] removeString(int max) {
+
+        String[] result = new String[0];
+
+        String[] temp = new String[1];
+        int sum = 0;
+
+
+        for (int i = 0; i < this.array.length; i++) {
+            temp[0] = this.array[i];
+
+            if (countStrings(temp[0]) < max) {
+
+                result = Arrays.copyOf(result, sum + 1);
+                result[sum] = temp[0];
+                sum++;
+            }
+        }
+        return result;
     }
 
     /**
