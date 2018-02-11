@@ -12,82 +12,39 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     }
 
     public String[] removeDuplicates  (int maxNumberOfDuplications){
-        String[] outputArray = this.array;
-        String [] toDelete = new String[0];
+        String[] finalStringArray = this.array;
+        String[] toDelete = new String[0];
+        String[] blankArray = new String[0];
         int deleteCounter =0;
         for(String s  : this.array){
-            if (contains(toDelete, s) == true){
-                continue;
-            }
-            else if (containsTimes(this.array, s) >= maxNumberOfDuplications){
+            if (containsTimes(this.array, s) >= maxNumberOfDuplications){
                 toDelete = Arrays.copyOf(toDelete, toDelete.length+1);
                 toDelete[deleteCounter] = s;
                 deleteCounter++;
             }
         }
         for(String s : toDelete){
-            outputArray = delete(outputArray, s);
+            finalStringArray = delete(finalStringArray, blankArray, s);
         }
-
-        return outputArray;
-
+        return finalStringArray;
     }
 
-    //@Override
+
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications){
-        String[] outputArray = this.array;
-        String [] toDelete = new String[0];
+        String[] finalStringArray = this.array;
+        String[] toDelete = new String[0];
+        String[] blankArray = new String[0];
         int deleteCounter =0;
         for(String s  : this.array){
-            if (contains(toDelete, s) == true){
-                continue;
-            }
-            else if (containsTimes(this.array, s) == exactNumberOfDuplications){
+            if (containsTimes(this.array, s) == exactNumberOfDuplications){
                 toDelete = Arrays.copyOf(toDelete, toDelete.length+1);
                 toDelete[deleteCounter] = s;
                 deleteCounter++;
             }
         }
         for(String s : toDelete){
-            outputArray = delete(outputArray, s);
+            finalStringArray = delete(finalStringArray, blankArray, s);
         }
-
-        return outputArray;
+        return finalStringArray;
     }
-
-    public static String[] delete(String[] inputArray, String value) {
-        String[] workingArray = inputArray;
-        String[] outputArray = new String[0];
-        int counter = 0;
-        for (int i = 0; i < workingArray.length; i++) {
-            if (!workingArray[i].equals(value)) {
-                outputArray = Arrays.copyOf(outputArray, outputArray.length + 1);
-                outputArray[counter] = workingArray[i];
-                counter++;
-            }
-        }
-        return outputArray;
-    }
-
-    public static int containsTimes(String[] inputArray, String word) {
-        int counter = 0;
-        for (String s : inputArray) {
-            if (s == word) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    public static boolean contains(String[] inputArray, String word) {
-        for (String s : inputArray) {
-            if (s == word) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
 }
