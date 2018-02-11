@@ -10,42 +10,28 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
-    public Integer[] removeDuplicates  (int maxNumberOfDuplications){
 
-        Integer[] finalIntArray = this.array;
-        Integer[] toDelete = new Integer[0];
-        Integer[] blankArray = new Integer[0];
-        int deleteCounter =0;
-        for(Integer i  : this.array){
-            if (containsTimes(this.array, i) >= maxNumberOfDuplications){
-            toDelete = Arrays.copyOf(toDelete, toDelete.length+1);
-            toDelete[deleteCounter] = i;
-            deleteCounter++;
-            }
-        }
-        for(Integer i : toDelete){
-            finalIntArray = delete(finalIntArray, blankArray,  i);
-        }
-        return finalIntArray;
+    public Integer[] removeDuplicates  (int maxNumberOfDuplications){
+        String[] stringArray = toStringArray(this.array);
+        StringDuplicateDeleter stringDD = new StringDuplicateDeleter(stringArray);
+        String[] stringResult = stringDD.removeDuplicates(maxNumberOfDuplications);
+        return StringDuplicateDeleter.toIntegerArray(stringResult);
     }
 
 
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications){
-        Integer[] finalIntArray = this.array;
-        Integer[] toDelete = new Integer[0];
-        Integer[] blankArray = new Integer[0];
-        int deleteCounter =0;
-        for(Integer i  : this.array){
-            if (containsTimes(this.array, i) == exactNumberOfDuplications){
-                toDelete = Arrays.copyOf(toDelete, toDelete.length+1);
-                toDelete[deleteCounter] = i;
-                deleteCounter++;
-            }
+        String[] stringArray = toStringArray(this.array);
+        StringDuplicateDeleter stringDD = new StringDuplicateDeleter(stringArray);
+        String[] stringResult = stringDD.removeDuplicatesExactly(exactNumberOfDuplications);
+        return StringDuplicateDeleter.toIntegerArray(stringResult);
+    }
+
+    public static String[] toStringArray (Integer[] intToConvert){
+        String[] convertedToString = new String[intToConvert.length];
+        for (int i = 0; i< intToConvert.length; i++){
+            convertedToString[i] = String.valueOf(intToConvert[i]);
         }
-        for(Integer i : toDelete){
-            finalIntArray = delete(finalIntArray, blankArray,  i);
-        }
-        return finalIntArray;
+        return convertedToString;
     }
 }
 

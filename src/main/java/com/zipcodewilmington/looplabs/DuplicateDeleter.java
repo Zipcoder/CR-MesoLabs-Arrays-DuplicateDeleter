@@ -14,7 +14,7 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
 
     abstract public T[] removeDuplicatesExactly(int exactNumberOfDuplications);
 
-    protected  T[] delete(T[] originalArray, T[] blankArray, T value) {
+    /*protected  T[] delete(T[] originalArray, T[] blankArray, T value) {
         T[] workingArray = originalArray;
         //blankArray is a workaround to basically create a new T[0], which Java won't let me do.
         T[] deletedArray = blankArray;
@@ -27,9 +27,9 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
             }
         }
         return deletedArray;
-    }
+    }*/
 
-    protected  int containsTimes(T[] inputArray, T value) {
+    /*protected  int containsTimes(T[] inputArray, T value) {
         int counter = 0;
         for (T i : inputArray) {
             if (i == value) {
@@ -37,5 +37,5 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
             }
         }
         return counter;
-    }
+    }*/
 }
