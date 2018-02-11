@@ -1,6 +1,9 @@
 package com.zipcodewilmington.looplabs;
 
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  *
@@ -11,114 +14,69 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
+    /**
+     *
+     * @param maxNumberOfDuplications
+     * @return this.array without duplicated that are equal to or greater than maxNumberOfDuplications
+     */
 
+    @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
-        String counter = "";
-        String buffArray = "";
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i].equals(array[i + 1])) {
-                counter += i;
-                if (i == array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-            } else if (!(array[i].equals(array[i + 1]))) {
-                if (counter.length() >= maxNumberOfDuplications) {
-                    counter = "";
-                } else if (i == array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-                for (int j = 0; j < counter.length(); j++) {
-                    buffArray += (counter.indexOf(j));
-                }
-                counter += "";
+        //rest of methods are built the same way
+
+        //init revised array
+        Integer[] revArray = new Integer[0];
+
+        //for loop to fill array
+        for(int i = 0; i < this.array.length; i++){
+            //if the recorded int doesn't meet the restrictions imposed, don't record it
+            if (numberOfOccurrences(this.array, this.array[i]) < maxNumberOfDuplications){
+                //counter for the index of the new array being observed
+                int currentIndex = revArray.length;
+                //copy of method to adjust the size
+                revArray = Arrays.copyOf(revArray, currentIndex+1);
+                //fill the array
+                revArray[currentIndex] = this.array[i];
             }
-        }
-        String[] newArray = buffArray.split("");
-        for (String i : newArray) System.out.println(i);
-        Integer[] revArray = new Integer[newArray.length];
-        for (int i = 0; i < buffArray.length(); i++) {
-            revArray[i] = Integer.valueOf(newArray[i]);
         }
         return revArray;
     }
 
 
+    /**
+     *
+     * @param exactNumberOfDuplications
+     * @return this.array without duplicated that are equal to exactNumberOfDuplications
+     */
 
-
-
-
-
-
-
-
-
+    @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        //counters
-        int counterForOcc = 0;
-        int countForHowManyInts = 1;
-
-        //counting how many different ints there are
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] != array[i - 1]) {
-                countForHowManyInts++;
-            }
-        }
-
-        //array to hold int and instances
-        Integer[][] numsAndOcc = new Integer[countForHowManyInts][2];
-
-        int counterForNumsInstances = 0;
-        //filling int into first column
-        numsAndOcc[0][0] = array[0];
-        counterForOcc = 0;
-        for (int i = 1; i < array.length; i++) {
-            if (!(array[i].equals(array[i - 1]))) {
-                numsAndOcc[counterForOcc][0] = array[i];
-                counterForOcc++;
-                System.out.println(numsAndOcc[counterForOcc][0]);
-            }
-        }
-
-        //filling intsances
-        numsAndOcc[0][1] = 1;
-        for (int i = 1; i < array.length; i++) {
-            counterForOcc = 0;
-                if (array[i].equals(array[i-1])) {
-                    counterForOcc++;
-                }
-                if (!array[i].equals(array[i-1])) {
-                    numsAndOcc[counterForNumsInstances][1] += counterForOcc;
-                    counterForNumsInstances++;
-                    //System.out.println(numsAndOcc[counterForNumsFirstIndex][1]);
-                }
-        }
-
-
-        //counting bad numbers
-        int countForBadNums = 0;
-        counterForOcc = 0;
-        for (int i = 0; i < numsAndOcc.length; i++) {
-            if (numsAndOcc[i][1] == exactNumberOfDuplications) {
-                countForBadNums += numsAndOcc[i][1];
-                numsAndOcc[i][1] = 0;
-
-            }
-            counterForOcc += numsAndOcc[i][1];
-        }
-
-
-
-        //filling output array
-        Integer[] revArray = new Integer[counterForOcc - countForBadNums];
-        int counterForRevArray = 0;
-        for (int i = 0; i < revArray.length; i++) {
-            for (int j = numsAndOcc[i].length; j > 0; j--) {
-                revArray[counterForRevArray] = numsAndOcc[i][0];
-                counterForRevArray++;
-                for (Integer num : revArray) System.out.println(num);
-
+        Integer[] revArray = new Integer[0];
+        for(int i = 0; i < this.array.length; i++){
+            if (numberOfOccurrences(this.array, this.array[i]) != exactNumberOfDuplications){
+                int currentIndex = revArray.length;
+                revArray = Arrays.copyOf(revArray, currentIndex+1);
+                revArray[currentIndex] = this.array[i];
             }
         }
         return revArray;
     }
+
+    /**
+     *
+     * @param arrayIn is the master array of values to be assessed
+     * @param targetValue is the integer being looked for
+     * @return the amount of times the target value shows up in this.array
+     */
+
+    public int numberOfOccurrences(Integer[] arrayIn, Integer targetValue){
+        int occurCounter = 0;
+        for(int i = 0; i < arrayIn.length; i++){
+            if (arrayIn[i].equals(targetValue)){
+                occurCounter++;
+            }
+        }
+        return occurCounter;
+    }
+
 }

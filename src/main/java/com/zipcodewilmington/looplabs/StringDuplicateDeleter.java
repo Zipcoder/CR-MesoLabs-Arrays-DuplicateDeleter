@@ -1,6 +1,7 @@
 package com.zipcodewilmington.looplabs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by leon on 1/28/18.
@@ -13,54 +14,37 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
-        String counter = "";
-        String buffArray = "";
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i].equals(array[i + 1])) {
-                counter += i;
-                if (i == array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-            } else if (!(array[i].equals(array[i + 1]))) {
-                if (counter.length() == maxNumberOfDuplications) {
-                    counter = "";
-                } else if (i >= array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-                for (int j = 0; j < counter.length(); j++) {
-                    buffArray += (counter.indexOf(j));
-                }
-                counter += "";
+        String[] revArray = new String[0];
+        for (int i = 0; i < this.array.length; i++) {
+            if (getOccForStrings(this.array, this.array[i]) < maxNumberOfDuplications) {
+                int currentIndex = revArray.length;
+                revArray = Arrays.copyOf(revArray, currentIndex + 1);
+                revArray[currentIndex] = this.array[i];
             }
         }
-        String[] revArray = buffArray.split("");
         return revArray;
     }
 
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        String counter = "";
-        String buffArray = "";
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i].equals(array[i + 1])) {
-                counter += i;
-                if (i == array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-            } else if (!(array[i].equals(array[i + 1]))) {
-                if (counter.length() == exactNumberOfDuplications) {
-                    counter = "";
-                } else if (i == array.length - 2) {
-                    counter += (array[i + 1]);
-                }
-                for (int j = 0; j < counter.length(); j++) {
-                    buffArray += (counter.indexOf(j));
-
-                }
-                counter += "";
+        String[] revArray = new String[0];
+        for(int i = 0; i < this.array.length; i++){
+            if(getOccForStrings(this.array, this.array[i]) != exactNumberOfDuplications){
+                int currentIndex = revArray.length;
+                revArray = Arrays.copyOf(revArray, currentIndex+1);
+                revArray[currentIndex] = this.array[i];
             }
         }
-        String[] revArray = buffArray.split("");
         return revArray;
+    }
+
+    public int getOccForStrings(String[] targetArray, String targetString){
+        int countForOcc = 0;
+        for(int i = 0; i < targetArray.length; i++){
+            if (targetArray[i].equals(targetString)){
+                countForOcc++;
+            }
+        }
+        return countForOcc;
     }
 }
