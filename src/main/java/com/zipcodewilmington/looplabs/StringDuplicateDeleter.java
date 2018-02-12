@@ -7,6 +7,8 @@ import java.util.Arrays;
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying the signature of this class.
  */
 public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
+
+
     //constructor
     public StringDuplicateDeleter (String[] intArray){
         super(intArray);
@@ -23,9 +25,27 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
             //store in newArray
         //return values
 
-        String[] anIntArray = new String Arrays.copyOf(this.array.length);
-        for(int i = 9 )
+        String[] anIntArray = new String(Arrays.copyOf(this.array.length));
+        for (int i = 0; i < this.array.length; i++){
+            if(getNumberOfOccurences < anIntArray[i]){
 
+            }
+        }
+        return null;
+    }
+
+    public static int getNumberOfOccurrences(String[] array, String value) {
+
+        //created a countOccurence holder, to hold value everytime it appears
+
+        int countOccurence = 0;
+
+        for (String myValue : array) {
+            if(myValue.equals(value))
+                countOccurence++;
+        }
+
+        return countOccurence;
     }
 
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications){
