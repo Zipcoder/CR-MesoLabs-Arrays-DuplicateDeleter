@@ -7,14 +7,14 @@ import java.util.Arrays;
  */
 public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
-    public StringDuplicateDeleter(Integer[] intArray) {
+    public StringDuplicateDeleter(String[] intArray) {
 
         super(intArray);
     }
 
     @Override
 
-    public Integer[] removeDuplicates(int maxDuplications) {
+    public String[] removeDuplicates(int maxDuplications) {
 
         String theRealest = "";
         int counter = 0;
@@ -26,37 +26,22 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
                 }
             }
 
-                if (counter < maxDuplications) {
-                    theRealest += this.array[i] + " ";
+            if (counter < maxDuplications) {
+                theRealest += this.array[i] + " ";
             }
 
             counter = 0;
         }
-
-        if (theRealest == "") {
-            String[] newArray = new String[0];
-            Integer[] resultIntArr = new Integer[newArray.length];
-            for (int k = 0; k < resultIntArr.length; k++) {
-                resultIntArr[k] = Integer.parseInt(newArray[k]);
-            }
-
-            return resultIntArr;
+        if (theRealest.length() < 1){
+            String[] emptyString = new String[]{};
+            return emptyString;
         }
-
-        else {
-            String[] resultStringArr = theRealest.split(" ");
-            Integer[] resultIntArr = new Integer[resultStringArr.length];
-            for (int m = 0; m < resultIntArr.length; m++) {
-                resultIntArr[m] = Integer.parseInt(resultStringArr[m]);
-            }
-
-            return resultIntArr;
-        }
+        String[] resultStringArray = theRealest.split(" ");
+        return resultStringArray;
     }
 
-
     @Override
-    public Integer[] removeDuplicatesExactly(int exactDuplications) {
+    public String[] removeDuplicatesExactly(int exactDuplications) {
 
         String theRealest = "";
         int counter = 0;
@@ -77,13 +62,13 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         }
 
         String[] resultStringArray = theRealest.split(" ");
-        Integer[] resultIntArray = new Integer[resultStringArray.length];
+      //  String[] resultIntArray = new String[resultStringArray.length];
 
-        for (int m = 0; m < resultIntArray.length; m++) {
-            resultIntArray[m] = Integer.parseInt(resultStringArray[m]);
-        }
+     //   for (int m = 0; m < resultIntArray.length; m++) {
+     //       resultIntArray[m] = Integer.parseInt(resultStringArray[m]);
+     //   }
 
-        return resultIntArray;
+        return resultStringArray;
     }
 }
 
