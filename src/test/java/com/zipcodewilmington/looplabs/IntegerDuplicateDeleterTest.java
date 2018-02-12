@@ -180,4 +180,12 @@ public class IntegerDuplicateDeleterTest {
         System.out.println("Input:\n\t" + Arrays.toString(input));
         TestUtils.assertArrayEquality(expected, actual);
     }
+
+    @Test
+    public void removeDuplicates() {
+    }
+
+    @Test
+    public void removeDuplicatesExactly() {
+    }
 }
