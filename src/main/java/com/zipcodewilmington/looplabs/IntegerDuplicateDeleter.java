@@ -16,8 +16,6 @@ code, (I literally didn't "wtf" once) but i absolutely cannot take credit for th
 given enough time I can absolutely learn it, retain it,and apply it to future applicable use. this is not a promise I
 would make that i didn't absolutely believe i could keep.
 
-Having said all of this (can't believe you're still reading this far down into my comments) if you still want to hand
-my ass to me that is absolutely your prerogative and if that is the case then so be it (smiles wanly).
 
 */
 
