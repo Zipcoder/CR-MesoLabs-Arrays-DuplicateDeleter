@@ -16,7 +16,7 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
 
 
-    private static int countDuplicates (String[] array, String value) {
+    public static int countDuplicates (String[] array, String value) {
         int dupeCount = 0;
         for(int i = 0; i < array.length; i++) {
             if(value.equals(array[i])) {
@@ -26,40 +26,44 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         return dupeCount;
     }
 
-
+    @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
 
         String[] myArray = Arrays.copyOf(this.array, this.array.length);
-        String keepString = "";
+        StringBuilder keepString = new StringBuilder();
 
         for(String keepIt: myArray) {
             int x = countDuplicates(myArray, keepIt);
             if (x < maxNumberOfDuplications) {
-                keepString += keepIt + "/";
+                keepString.append(keepIt)
+                        .append("/");
             }
-
         }
-        if(keepString.equals("")) {
-            keepString = "/";
+        if(keepString.toString().equals("")) {
+            keepString.append("/");
         }
 
-        return keepString.split("/");
+        return keepString.toString().split("/");
     }
 
-
+    @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
 
         String[] newArray = Arrays.copyOf(this.array, this.array.length);
-        String minusDeletes = "";
+        StringBuilder minusDeletes = new StringBuilder();
 
         for(int i = 0; i < newArray.length; i++) {
             int x = countDuplicates(newArray, newArray[i]);
             if (x != exactNumberOfDuplications) {
-                minusDeletes += newArray[i] + "/";
+                minusDeletes.append(newArray[i])
+                            .append("/");
             }
         }
+        if(minusDeletes.toString().equals("")) {
+            minusDeletes.append("/");
+        }
 
-        return minusDeletes.split("/");
+        return minusDeletes.toString().split("/");
     }
 }
 
