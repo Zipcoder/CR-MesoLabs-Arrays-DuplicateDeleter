@@ -1,5 +1,10 @@
 package com.zipcodewilmington.looplabs;
 
+import com.sun.org.apache.xpath.internal.operations.String;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying the signature of this class.
@@ -16,20 +21,61 @@ my ass to me that is absolutely your prerogative and if that is the case then so
 
 */
 
-
 public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
-   public IntegerDuplicateDeleter(Integer[] intArray){
+    public IntegerDuplicateDeleter(Integer[] intArray){
 
-       super(intArray);
-
-    }
-
-    public Integer[] removeDuplicates(int maxNumberOfDuplications) {
+        super(intArray);
 
     }
 
-    return null;
+    @Override
+    public Integer[] removeDuplicates(int maxNumberOfDuplications){
+
+        String listWithDupsRemoved = "";
+        int timesDupOccurred = 0;
+        int count= 0;
+
+        for (int i = 0; i < this.array.length; i++){
+
+            for (int k = 0; k < this.array.length; k++){
+
+                if (this.array[k].equals(this.array[i])){
+                    count++;
+                }
+            }
+
+            if (timesDupOccurred < maxNumberOfDuplications){
+                listWithDupsRemoved += this.array[i] + " ";
+                count++;
+            }
+
+            count = 0;
+
+        }
+
+        String[] freeOfDuplicates = listWithDupsRemoved.split(" ");
+
+        if (count > 0) {
+            Integer[] freeOfDupsIntArray = new Integer[freeOfDuplicates.length];
+
+            for (int i = 0; i < freeOfDuplicates.length; i++){
+                freeOfDupsIntArray[i] = Integer.parseInt(freeOfDuplicates[i]);
+            }
+
+            return freeOfDupsIntArray;
+
+        } else {
+            Integer[] emptyArray = {};
+            return emptyArray;
+        }
+    }
+
+@Override
+    public Integer[] removeExactNumOfDuplicates(int exactNumOfDuplications){
+
+        //start here amy
+}
 
 }
 
