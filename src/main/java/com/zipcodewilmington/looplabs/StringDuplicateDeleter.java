@@ -7,4 +7,17 @@ package com.zipcodewilmington.looplabs;
 public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
 
+    public StringDuplicateDeleter(String[] intArray) {
+        super(intArray);
+    }
+
+    @Override
+    public String[] removeDuplicates(int maxNumberOfDuplications) {
+        return new String[0];
+    }
+
+    @Override
+    public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
+        return new String[0];
+    }
 }
