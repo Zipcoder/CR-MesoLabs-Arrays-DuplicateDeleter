@@ -33,19 +33,19 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     public Integer[] removeDuplicates(int maxNumberOfDuplications){
 
         String listWithDupsRemoved = "";
-        int timesDupOccurred = 0;
+        int totalTimesDupOccurred = 0;
         int count= 0;
 
         for (int i = 0; i < this.array.length; i++){
 
-            for (int k = 0; k < this.array.length; k++){
+            for (int j = 0; j < this.array.length; j++){
 
-                if (this.array[k].equals(this.array[i])){
+                if (this.array[j].equals(this.array[i])){
                     count++;
                 }
             }
 
-            if (timesDupOccurred < maxNumberOfDuplications){
+            if (totalTimesDupOccurred < maxNumberOfDuplications){
                 listWithDupsRemoved += this.array[i] + " ";
                 count++;
             }
