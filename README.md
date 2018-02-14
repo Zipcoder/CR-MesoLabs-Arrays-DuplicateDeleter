@@ -1,5 +1,4 @@
-
-# Delete Duplicates 
+# Delete Duplicates [![Build Status](https://travis-ci.org/miscbits/CR-MesoLabs-OOP-DuplicateDeleter.svg?branch=master)](https://travis-ci.org/miscbits/CR-MesoLabs-OOP-DuplicateDeleter)
 * **Objective**
 	* To write methods which remove duplicate elements from an array.
 * **Purpose**
