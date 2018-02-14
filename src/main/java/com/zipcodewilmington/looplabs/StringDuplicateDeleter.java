@@ -9,19 +9,14 @@ import java.util.Arrays;
  */
 public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
-
     public StringDuplicateDeleter(String[] intArray) {
         super(intArray);
     }
 
-
-
     public static int countDuplicates (String[] array, String value) {
         int dupeCount = 0;
         for(int i = 0; i < array.length; i++) {
-            if(value.equals(array[i])) {
-                    dupeCount++;
-            }
+            if(value.equals(array[i])) dupeCount++;
         }
         return dupeCount;
     }
@@ -36,12 +31,10 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
             int x = countDuplicates(myArray, keepIt);
             if (x < maxNumberOfDuplications) {
                 keepString.append(keepIt)
-                        .append("/");
+                          .append("/");
             }
         }
-        if(keepString.toString().equals("")) {
-            keepString.append("/");
-        }
+        if(keepString.toString().equals("")) keepString.append("/");
 
         return keepString.toString().split("/");
     }
@@ -59,11 +52,8 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
                             .append("/");
             }
         }
-        if(minusDeletes.toString().equals("")) {
-            minusDeletes.append("/");
-        }
+        if(minusDeletes.toString().equals("")) minusDeletes.append("/");
 
         return minusDeletes.toString().split("/");
     }
 }
-

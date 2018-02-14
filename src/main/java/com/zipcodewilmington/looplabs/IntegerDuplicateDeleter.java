@@ -13,21 +13,19 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         super(intArray);
     }
 
-
+    //count the number of times that a number is present
     public static int countDuplicates (Integer[] array, Integer value) {
-        int dupeCount = 0;
-        for(int i = 0; i < array.length; i++) {
-            if(value.equals(array[i])) {
-                dupeCount++;
-            }
+        int count = 0;
+        for (Integer item : array) {
+            if (value.equals(item)) count++;
         }
-        return dupeCount;
+        return count;
     }
 
+    //turn the string into an Integer array
     public Integer[] stringToInteger(String keepNumb) {
         String[] stringToInt = keepNumb.split("/");
         Integer[] exactIntRemoved = new Integer [stringToInt.length];
-
         for(int i = 0; i<stringToInt.length; i++) {
             exactIntRemoved[i] = Integer.parseInt(stringToInt[i]);
         }
@@ -44,44 +42,29 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         for(Integer keepIt: notYetDel) {
             int x = countDuplicates(notYetDel, keepIt);
             if (x < maxNumberOfDuplications) {
-                keepInteger
-                        .append(keepIt)
-                        .append("/");
+                keepInteger.append(keepIt)
+                           .append("/");
             }
-
         }
-        if(keepInteger.toString().equals("")) {
-            keepInteger.append("/");
-        }
+        if(keepInteger.toString().equals("")) keepInteger.append("/");
         String kept = keepInteger.toString();
-        Integer [] arrayReturned = stringToInteger(kept);
-        return arrayReturned;
+        return stringToInteger(kept);
     }
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
         Integer [] myIntArray = Arrays.copyOf(this.array, this.array.length);
-        String keepNumb = "";
+        StringBuilder keepNumb = new StringBuilder();
 
         for(Integer it: myIntArray) {
             int x = countDuplicates(myIntArray, it);
             if (x != exactNumberOfDuplications) {
-                keepNumb += it + "/";
+                keepNumb.append(it)
+                        .append("/");
             }
         }
-        if(keepNumb.equals("")) {
-            keepNumb = "/";
-        }
+        if(keepNumb.toString().equals("")) keepNumb.append("/");
         String middle = keepNumb.toString();
-        Integer[] exactRemoved = stringToInteger(middle);
-/*        String[] stringToInt = keepNumb.split("/");
-        Integer[] exactIntRemoved = new Integer [stringToInt.length];
-
-        for(int i = 0; i<exactIntRemoved.length; i++) {
-            exactIntRemoved[i] = Integer.parseInt(stringToInt[i]);
-        }*/
-
-        return exactRemoved;
+        return stringToInteger(middle);
     }
-
 }
