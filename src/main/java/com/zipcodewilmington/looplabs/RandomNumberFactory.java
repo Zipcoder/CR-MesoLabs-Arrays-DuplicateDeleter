@@ -11,6 +11,7 @@ public final class RandomNumberFactory {
 
     private RandomNumberFactory() {
     }
+
     /**
      * @param min
      * @param max
@@ -45,7 +46,7 @@ public final class RandomNumberFactory {
      */
     public static Integer[] createIntegers(int min, int max, int length) {
         Integer[] integers = new Integer[length];
-        for(int i=0; i<length; i++) {
+        for (int i = 0; i < length; i++) {
             integers[i] = createInteger(min, max);
         }
         return integers;
@@ -72,7 +73,7 @@ public final class RandomNumberFactory {
      */
     public static String[] createStrings(char min, char max, int stringLength, int arrayLength) {
         String[] array = new String[arrayLength];
-        for(int i=0; i<arrayLength; i++) {
+        for (int i = 0; i < arrayLength; i++) {
             array[i] = createString(min, max, stringLength);
         }
         return array;

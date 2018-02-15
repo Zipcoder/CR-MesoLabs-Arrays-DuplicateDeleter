@@ -37,7 +37,6 @@ public class IntegerDuplicateDeleterTest {
     }
 
 
-
     @Test
     public void testRemoveDuplicatesExactly2() {
         Integer[] expected = new Integer[]{0, 0, 0, 2, 2, 4, 4, 5, 5, 5, 9, 9, 9};
