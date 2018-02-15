@@ -11,5 +11,6 @@ public abstract class DuplicateDeleter<T> implements DuplicateDeleterInterface<T
     }
 
     abstract public T[] removeDuplicates(int maxNumberOfDuplications);
+
     abstract public T[] removeDuplicatesExactly(int exactNumberOfDuplications);
 }
