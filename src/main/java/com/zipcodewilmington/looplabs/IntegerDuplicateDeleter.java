@@ -15,70 +15,36 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder nonDuplicateString = new StringBuilder();
 
-        int counter = 0;
 
-        for (int i = 0; i < this.array.length; i++) {
-            for (int j = 0; j < this.array.length; j++) {
-                if (this.array[i].equals(this.array[j])) {
+
+        for (int outsideNum = 0; outsideNum < array.length; outsideNum++) {
+            int counter = 0;
+
+            for (int insideNum = 0; insideNum < this.array.length; insideNum++) {
+                if (this.array[outsideNum].equals(this.array[insideNum])) {
                     counter++;
                 }
             }
 
             if (!(counter == exactNumberOfDuplications)) {
-                sb.append(this.array[i]);
-            }
-            counter = 0;
-        }
-    String [] removedDupArray = sb.toString().split("");
-
-    Integer[] sbArray = new Integer[removedDupArray.length];
-
-
-    if (!removedDupArray[0].equals("")){
-
-            for (int i = 0; i < sbArray.length; i++){
-                sbArray[i] = Integer.parseInt(removedDupArray[i]);
+                nonDuplicateString.append(this.array[outsideNum]);
             }
 
-            return sbArray;
-
-        } else {
-            Integer[] empty = new Integer[0];
-            return empty;
         }
+        String [] removedDupArray = nonDuplicateString.toString().split("");
+
+        Integer[] sbArray = new Integer[removedDupArray.length];
 
 
-
+        return getIntegers(removedDupArray, sbArray);
 
 
     }
 
-        @Override
-        public Integer[] removeDuplicates (int maxNumberOfDuplications){
-            StringBuilder sb = new StringBuilder();
-
-            int counter = 0;
-
-            for (int i = 0; i < this.array.length; i++) {
-                for (int j = 0; j < this.array.length; j++) {
-                    if (this.array[i].equals(this.array[j])) {
-                        counter++;
-                    }
-                }
-
-                if ((counter < maxNumberOfDuplications)) {
-                    sb.append(this.array[i]);
-                }
-                counter = 0;
-            }
-            String [] removedDupArray = sb.toString().split("");
-
-            Integer[] sbArray = new Integer[removedDupArray.length];
-
-
-            if (!removedDupArray[0].equals("")){
+    private Integer[] getIntegers(String[] removedDupArray, Integer[] sbArray) {
+        if (!removedDupArray[0].equals("")){
 
                 for (int i = 0; i < sbArray.length; i++){
                     sbArray[i] = Integer.parseInt(removedDupArray[i]);
@@ -87,9 +53,31 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
                 return sbArray;
 
             } else {
-                Integer[] empty = new Integer[0];
-                return empty;
+                return new Integer[0];
+            }
+    }
+
+    @Override
+        public Integer[] removeDuplicates (int maxNumberOfDuplications) {
+        StringBuilder nonDupString = new StringBuilder();
+
+        for (int outsideNum = 0; outsideNum < this.array.length; outsideNum++) {
+            int counter = 0;
+
+            for (int insideNum = 0; insideNum < this.array.length; insideNum++) {
+                if (this.array[outsideNum].equals(this.array[insideNum])) {
+                    counter++;
+                }
+            }
+            if ((counter < maxNumberOfDuplications)) {
+                nonDupString.append(this.array[outsideNum]);
             }
         }
+        String[] removedDupArray = nonDupString.toString().split("");
 
+        Integer[] sbArray = new Integer[removedDupArray.length];
+
+
+        return getIntegers(removedDupArray, sbArray);
     }
+}
