@@ -36,7 +36,6 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         }
 
         String[] dupeFree = noDupes.split(" ");
-        //System.out.println(dupeFree.length);
 
         if (countAdded > 0) {
             Integer[] dupeFreeIntArray = new Integer[dupeFree.length];
@@ -49,8 +48,6 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
             Integer[] emptyIntArray = new Integer[0];
             return emptyIntArray;
         }
-
-
     }
 
     @Override
