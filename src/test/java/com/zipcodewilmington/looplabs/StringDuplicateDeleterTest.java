@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 /**
  * Created by leon on 1/28/18.
+ *
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying this class.
  */
 public class StringDuplicateDeleterTest {
@@ -63,18 +64,6 @@ public class StringDuplicateDeleterTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     @Test
     public void testRemoveDuplicates0() {
         String[] input = new String[]{"aa", "aa", "aa", "aa", "aa", "ab", "ba", "ba", "ba", "ba", "bb", "bb", "bb", "bb", "bb"};
@@ -83,7 +72,6 @@ public class StringDuplicateDeleterTest {
         String[] actual = deleter.removeDuplicates(0);
         TestUtils.assertArrayEquality(expected, actual);
     }
-
 
 
     @Test
@@ -113,24 +101,6 @@ public class StringDuplicateDeleterTest {
         String[] actual = deleter.removeDuplicates(3);
         TestUtils.assertArrayEquality(expected, actual);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Test
