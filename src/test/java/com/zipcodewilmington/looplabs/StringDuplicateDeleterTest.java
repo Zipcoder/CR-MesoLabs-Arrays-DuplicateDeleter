@@ -24,7 +24,6 @@ public class StringDuplicateDeleterTest {
     @Test
     public void testRemoveDuplicatesExactly1() {
         String[] expected = new String[]{"aba", "aba", "bba", "bba", "bba", "bba", "bbb", "bbb"};
-        //                               "aba", "aba", "bba", "bba", "bba", "bba", "bbb", "bbb"
         String[] actual = deleter.removeDuplicatesExactly(1);
         TestUtils.assertArrayEquality(expected, actual);
     }

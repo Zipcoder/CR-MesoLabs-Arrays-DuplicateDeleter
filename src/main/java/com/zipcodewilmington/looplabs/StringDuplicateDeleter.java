@@ -13,47 +13,39 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
     }
          String[] myCopyOfArray = Arrays.copyOf(this.array,this.array.length);
 
+    /**
+     *
+     * @param maxNumberOfDuplications
+     * @return
+     */
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
-        String[] toBeRemoved = new String[0];
-        int toBeRemovedIndex = 0;
+        String[] outPut = new String[0];
+        int outPutIndex = 0;
         for (String s : myCopyOfArray) {
-            if (checkExistence(toBeRemoved,s)) {
-                continue;
-            } else if (getNumberOfOccurrences(myCopyOfArray, s)>= maxNumberOfDuplications) {
-                toBeRemoved = Arrays.copyOf(toBeRemoved, toBeRemoved.length+1);
-                toBeRemoved[toBeRemovedIndex] = s;
-                toBeRemovedIndex++;
+
+           if(getNumberOfOccurrences(myCopyOfArray, s)< maxNumberOfDuplications) {
+                outPut = Arrays.copyOf(outPut, outPut.length+1);
+                outPut[outPutIndex] = s;
+                outPutIndex++;
             }
-
         }
 
-        String[] resultArray = Arrays.copyOf(myCopyOfArray, myCopyOfArray.length);
-        for (int r = 0; r < toBeRemoved.length; r++) {
-            resultArray = deleter(resultArray, toBeRemoved[r]);
-        }
-        return resultArray;
+        return outPut;
     }
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        String[] toBeRemoved = new String[0];
-        int toBeRemovedIndex = 0;
+        String[] outPut = new String[0];
+        int outPutIndex = 0;
         for (String s : myCopyOfArray) {
-            if (checkExistence(toBeRemoved,s)) {
-                continue;
-            } else if (getNumberOfOccurrences(myCopyOfArray, s) == exactNumberOfDuplications) {
-                toBeRemoved = Arrays.copyOf(toBeRemoved, toBeRemoved.length+1);
-                toBeRemoved[toBeRemovedIndex] = s;
-                toBeRemovedIndex++;
+            if (getNumberOfOccurrences(myCopyOfArray, s) != exactNumberOfDuplications) {
+                outPut = Arrays.copyOf(outPut, outPut.length+1);
+                outPut[outPutIndex] = s;
+                outPutIndex++;
             }
 
         }
-
-        String[] resultArray = Arrays.copyOf(myCopyOfArray, myCopyOfArray.length);
-        for (int r = 0; r < toBeRemoved.length; r++) {
-                resultArray= deleter(resultArray, toBeRemoved[r]);
-        }
-        return resultArray;
+        return outPut;
     }
 
     public static int getNumberOfOccurrences(String[] array, String value) {
@@ -66,40 +58,5 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
                   }
               return counter;
     }
-    public static String[] deleter(String[] array, String valueToRemove) {
-        int counter =getNumberOfOccurrences(array, valueToRemove);
-        String[] valuesToKeep = new String[array.length];
-        for(int i=0;i<array.length;i++){
-            if(!(array[i].equals(valueToRemove)))
-            {
-                valuesToKeep[i]=array[i];
-
-            }
-        }
-        String[] resultArray = new String[array.length-counter];
-        int resultArrayIndex=0;
-
-        for( String element: valuesToKeep){
-
-            if(element!=null){
-                resultArray[resultArrayIndex]=element;
-                resultArrayIndex++;
-            }
-
-
-        }
-
-        return resultArray;
-    }
-
-    public static boolean checkExistence(String[] array, String checkElement){
-        for(int a=0;a<array.length;a++){
-            if(checkElement.equals(array[a])){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 }
