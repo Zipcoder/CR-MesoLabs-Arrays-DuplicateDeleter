@@ -48,6 +48,8 @@ public class IntegerDuplicateDeleterTest {
 
     @Test
     public void testRemoveDuplicatesExactly3() {
+        Integer[] intArray = new Integer[]{0, 0, 0, 1, 2, 2, 4, 4, 5, 5, 5, 6, 9, 9, 9};
+        IntegerDuplicateDeleter duplicateDeleter = new IntegerDuplicateDeleter(intArray);
         Integer[] expected = new Integer[]{1, 2, 2, 4, 4, 6};
         deleter.removeDuplicates(3);
         deleter.removeDuplicatesExactly(2);
