@@ -22,49 +22,35 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
         return count;
     }
 
-    //turn the string into an Integer array
-    public Integer[] stringToInteger(String keepNumb) {
-        String[] stringToInt = keepNumb.split("/");
-        Integer[] exactIntRemoved = new Integer [stringToInt.length];
-        for(int i = 0; i<stringToInt.length; i++) {
-            exactIntRemoved[i] = Integer.parseInt(stringToInt[i]);
-        }
-        return exactIntRemoved;
-    }
-
 
     @Override
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
-
-        Integer[] notYetDel = Arrays.copyOf(this.array, this.array.length);
-        StringBuilder keepInteger = new StringBuilder();
-
-        for(Integer keepIt: notYetDel) {
-            int x = countDuplicates(notYetDel, keepIt);
+        Integer[] notYetDel = Arrays.copyOf(array, array.length);
+        int count = 0;
+        for(int i = 0; i<array.length; i++) {
+            int x = countDuplicates(array, array[i]);
             if (x < maxNumberOfDuplications) {
-                keepInteger.append(keepIt)
-                           .append("/");
+                notYetDel[count] = array[i];
+                count++;
             }
         }
-        if(keepInteger.toString().equals("")) keepInteger.append("/");
-        String kept = keepInteger.toString();
-        return stringToInteger(kept);
+        return Arrays.copyOf(notYetDel, count);
+
+
     }
 
     @Override
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
         Integer [] myIntArray = Arrays.copyOf(this.array, this.array.length);
-        StringBuilder keepNumb = new StringBuilder();
-
-        for(Integer it: myIntArray) {
-            int x = countDuplicates(myIntArray, it);
+        int count = 0;
+        for(Integer it: array) {
+            int x = countDuplicates(array, it);
             if (x != exactNumberOfDuplications) {
-                keepNumb.append(it)
-                        .append("/");
+                myIntArray[count] = it;
+                count++;
+
             }
         }
-        if(keepNumb.toString().equals("")) keepNumb.append("/");
-        String middle = keepNumb.toString();
-        return stringToInteger(middle);
+        return Arrays.copyOf(myIntArray,count);
     }
 }

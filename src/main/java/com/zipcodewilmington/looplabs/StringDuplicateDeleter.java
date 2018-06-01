@@ -23,37 +23,29 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
 
     @Override
     public String[] removeDuplicates(int maxNumberOfDuplications) {
-
         String[] myArray = Arrays.copyOf(this.array, this.array.length);
-        StringBuilder keepString = new StringBuilder();
-
+        int count = 0;
         for(String keepIt: myArray) {
             int x = countDuplicates(myArray, keepIt);
             if (x < maxNumberOfDuplications) {
-                keepString.append(keepIt)
-                          .append("/");
+                myArray[count] = keepIt;
+                count++;
             }
         }
-        if(keepString.toString().equals("")) keepString.append("/");
-
-        return keepString.toString().split("/");
+        return Arrays.copyOf(myArray,count);
     }
 
     @Override
     public String[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-
         String[] newArray = Arrays.copyOf(this.array, this.array.length);
-        StringBuilder minusDeletes = new StringBuilder();
-
-        for(int i = 0; i < newArray.length; i++) {
-            int x = countDuplicates(newArray, newArray[i]);
+        int count = 0;
+        for(String keep: array) {
+            int x = countDuplicates(array, keep);
             if (x != exactNumberOfDuplications) {
-                minusDeletes.append(newArray[i])
-                            .append("/");
+                newArray[count] = keep;
+                count++;
             }
         }
-        if(minusDeletes.toString().equals("")) minusDeletes.append("/");
-
-        return minusDeletes.toString().split("/");
+        return Arrays.copyOf(newArray, count);
     }
 }
