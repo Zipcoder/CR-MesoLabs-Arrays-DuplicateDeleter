@@ -8,8 +8,7 @@ import java.util.Random;
  */
 public final class RandomNumberFactory {
     private static volatile Random random = new Random();
-
-    private RandomNumberFactory() {
+        private RandomNumberFactory() {
     }
     /**
      * @param min
