@@ -2,6 +2,10 @@ package com.zipcodewilmington.looplabs;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by leon on 1/29/18.
@@ -13,32 +17,22 @@ public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
     }
 
     public Integer[] removeDuplicates(int maxNumberOfDuplications) {
-        ArrayList<Integer> newList = new ArrayList<>();
-        for (Integer num : array) {
-            if (getNumberOfOccurrances(num) < maxNumberOfDuplications) {
-                newList.add(num);
-            }
-        }
-        return newList.toArray(new Integer[0]);
+        return Arrays.stream(array)
+                .filter(element -> getNumberOfOccurrances(element) < maxNumberOfDuplications)
+                .collect(Collectors.toList())
+                .toArray(new Integer[0]);
     }
 
-    public Integer getNumberOfOccurrances(Integer element) {
-        Integer count = 0;
-        for (Integer num : array) {
-            if (num.equals(element)) {
-                count++;
-            }
-        }
-        return count;
+    public long getNumberOfOccurrances(Integer element) {
+        return (Arrays.stream(array)
+                .filter(num -> num == element)
+                .count());
     }
 
     public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
-        ArrayList<Integer> newList = new ArrayList<>();
-        for (Integer num : array) {
-            if (getNumberOfOccurrances(num) != exactNumberOfDuplications) {
-                newList.add(num);
-            }
-        }
-        return newList.toArray(new Integer[0]);
+        return Arrays.stream(array)
+                .filter(element -> getNumberOfOccurrances(element) != exactNumberOfDuplications)
+                .collect(Collectors.toList())
+                .toArray(new Integer[0]);
     }
 }
